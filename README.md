@@ -6,9 +6,8 @@ The data I analyzed gave information about the life expectancy, population, and 
 
 The software I wrote was meant to specifically analize the life expectancies. It answers the question of which country had the highest life expectancy every 10 years and made a visual to show any conection between life expectancy and the other factors.
 
-{Provide a link to your YouTube demonstration.  It should be a 4-5 minute demo of the data set, the questions and answers, the code running and a walkthrough of the code.}
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video]([http://youtube.link.goes.here](https://youtu.be/2wjiKA4RtB4))
 
 # Data Analysis Results
 I included my questions and answers within my data file
