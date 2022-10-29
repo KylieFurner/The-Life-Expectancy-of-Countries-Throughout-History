@@ -1,0 +1,98 @@
+---
+title: "The Life Expectancy Of Countries Around the World"
+author: "Kylie Furner"
+output:
+  html_document:  
+    keep_md: true
+    toc: true
+    toc_float: true
+    code_folding: hide
+    fig_height: 6
+    fig_width: 12
+    fig_align: 'center'
+---
+
+
+
+
+
+
+```r
+# This R-Chunk is used to import all the datasets
+
+library(gapminder)
+gap <- gapminder
+library(dplyr)
+library(ggplot2)
+```
+
+## Background
+
+In this project I created a graph to analyze the gapminder dataset. This data set analyzes the wealth and life expectancy of countries around the world. The dataset analyzes the Life Expectancy, population, and gdp per capita of each country from the year 1952-2007.  
+
+
+
+## Question 1
+The first thing I wanted to know was which country had the highest life expectancy every 10 years. I was able to answer this question by filtering the data by year and then finding the max life expectancy and associating it with a country.
+
+
+
+#### Question 1 Conclusion
+
+
+```r
+i <- 1952
+while (i < 2008){
+  highestLifeExp <- gap %>%
+  filter(year == i)
+  # x <- which.max(highestLifeExp$lifeExp)
+  # This allowed me to find the index of which country had the highest life exp
+  
+  y <- toString(i)
+  
+  highest <- max(highestLifeExp$lifeExp)
+  # finds the value of the highest life expectancy
+
+  print(paste0("The highest life expectancy in the year ", y, " was ", highest))
+  i <- i + 10
+}
+```
+
+```
+## [1] "The highest life expectancy in the year 1952 was 72.67"
+## [1] "The highest life expectancy in the year 1962 was 73.68"
+## [1] "The highest life expectancy in the year 1972 was 74.72"
+## [1] "The highest life expectancy in the year 1982 was 77.11"
+## [1] "The highest life expectancy in the year 1992 was 79.36"
+## [1] "The highest life expectancy in the year 2002 was 82"
+```
+
+
+I couldn't find a way to get the country associated with it's life expectancy in code, but I was able to get the row of each country and found that these were the leading countries for life expectancy each year.
+1952: Norway
+1962: Iceland
+1972: Sweden
+1982: Japan
+1992: Japan
+2002: Japan
+I thought it was super interesting that Japan was the leader for each of the last 3 decades. It makes me wonder what they changed to achieve that.
+
+## Question 2
+for my second question I wanted to create a graph that looks at most of the factors having to do with life expectancy. The graph is split into columns based on every 5 years. I wanted to know if one continent has a better life expectancy and if population or GDP per capita make a difference.  
+
+
+```r
+filteredCountries <- gap %>%
+filter(country != "Kuwait")
+# I filtered out Kuwait because it was an outlier that made the data harder to read
+
+# Use this R-Chunk to plot & visualize your data!
+ggplot(data = filteredCountries, mapping = aes(x = lifeExp, y = gdpPercap, color = continent, size = pop)) + geom_point() + facet_wrap(~year, ncol = 12) + labs(size = "Population", y = "GDP Per Capita", x = "Life Expectancy", color = "Continent") + scale_y_continuous(trans = "sqrt")
+```
+
+![](Data-Analysis-Project_files/figure-html/plot_data-1.png)<!-- -->
+
+#### Question 2 Conclusion
+
+Based on the graph I would say that most of the countries with a high GDP per capita also have a high life expectancy although there are one or two outliers. Another conclusion is that population does not seem to be a major factor in determining if a country has a high life expectancy. Based on the graph as it also seems that Europe is the most consistent looking continent with most of its countries having a high life expectancy.
+
